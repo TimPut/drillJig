@@ -19,7 +19,7 @@ difference(){
   union(){
     translate([-25.4/2-5-1,-25.4/2,57+16])cube([25.4+5+5+1+1,250+.3,25.4]);
     translate([-25.4/2-5-1,170-25.4/2,25.4])cube([25.4+5+5+1+1,60,60]);
-    #  translate([-25.4/2-5-1,190.3-25.4/2,25.4+20])cube([25.4+5+5+1+1,60,40]);
+    translate([-25.4/2-5-1,190.3-25.4/2,25.4+20])cube([25.4+5+5+1+1,60,40]);
 
     translate([25.4/2+1,250-25.4-26/2,25.4/2])cube([5,26,62]);
     translate([25.4/2+1,250-25.4,25.4/2])rotate([0,90,0])cylinder(d=26+6,h=5);
@@ -46,6 +46,25 @@ module DremelNose(){
   };
 };
 
+module PencilCollet(){
+  difference(){
+    union(){
+      translate([0,0,-4])cylinder(d=30,h=6,$fn=6);
+      translate([0,0,20])mirror([0,1,0])mirror([0,0,1])
+        english_thread(diameter=3/4-(0.0125*20/25.4), threads_per_inch=12, length=20/25.4, internal=false,leadin=2,taper=-0.05);
+    };
+    union(){
+      translate([0,0,-100])cylinder(d=7.6,h=200,$fn=6);
+      #for (i = [0:60:360]){
+      rotate([0,0,i])translate([0,20/2,-20/2+20-4])cube([1,20,20],center=true);
+      rotate([0,0,i+30])translate([0,20/2,20/2+4])cube([1,20,20],center=true);
+      translate([0,0,20-4])cylinder(d=8,h=10);
+       };
+      };
+  };
+};
 
+// (/ 6.7 (cos (* pi (/ 30 180.0)))) =  7.736493607140985 pencil hex major diam from flats diam
 /* Top(); */
-Bottom();
+/* Bottom(); */
+PencilCollet();
